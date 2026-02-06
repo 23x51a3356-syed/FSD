@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Student Feedback Survey</title>
+
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            background:#f2f2f2;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            height:100vh;
+        }
+
+        .container{
+            background:white;
+            padding:30px;
+            width:400px;
+            border-radius:10px;
+            box-shadow:0 5px 15px rgba(0,0,0,0.15);
+        }
+
+        h2{
+            text-align:center;
+            margin-bottom:25px;
+        }
+
+        label{
+            font-weight:bold;
+            display:block;
+            margin-top:12px;
+        }
+
+        input{
+            width:100%;
+            padding:10px;
+            margin-top:6px;
+            border-radius:6px;
+            border:1px solid #ccc;
+        }
+
+        button{
+            width:100%;
+            margin-top:20px;
+            padding:12px;
+            background:#1976d2;
+            color:white;
+            border:none;
+            border-radius:6px;
+            cursor:pointer;
+            font-size:16px;
+        }
+
+        button:hover{
+            background:#125aa0;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Student Feedback Survey</h2>
+
+    <form id="surveyForm">
+        <label for="username">Username</label>
+        <input type="text" id="username" required />
+
+        <label for="password">Password</label>
+        <input type="password" id="password" required />
+
+        <label for="email">Email</label>
+        <input type="email" id="email" required />
+
+        <button type="submit">Submit Survey</button>
+    </form>
+</div>
+
+<script>
+const form = document.getElementById("surveyForm");
+
+form.addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const data = {
+        username: document.getElementById("username").value,
+        password: document.getElementById("password").value,
+        email: document.getElementById("email").value,
+        timestamp: new Date().toISOString()
+    };
+
+    // Get existing data from Local Storage
+    let surveys = JSON.parse(localStorage.getItem("surveyData")) || [];
+
+    // Add new entry
+    surveys.push(data);
+
+    // Save back to Local Storage
+    localStorage.setItem("surveyData", JSON.stringify(surveys));
+
+    alert("Survey saved successfully!");
+
+    form.reset();
+});
+</script>
+
+</body>
+</html>
